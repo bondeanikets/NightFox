@@ -4,7 +4,6 @@
 
 * Download and install the latest version of node.js: https://nodejs.org/en/
 * Create a new directory, which will be your root directory).
-* Create a new file called: app.js 
 * Go to your root directory in the terminal (e.g., Windows PowerShell).
 * Run the following command in the terminal and follow the instructions: npm init
 * Enter the following if it does not match the parentheses, and hit enter for everything else:
@@ -21,4 +20,4 @@
 * Pull this repository
 * cd from terminal to the root folder of this repository
 * Type:  node app.js (you can also type: node app)
-* Open a web browser (e.g., Google Chrome) and enter the following website address: http://localhost:3000
+* Open a web browser (e.g., Google Chrome) and enter the following website address: http://localhost:8000
