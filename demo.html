@@ -49,22 +49,57 @@
             background-image: url('https://daks2k3a4ib2z.cloudfront.net/58adc68142ff652745bbf599/58add3fc4effab671dfe7da6_Ikes%20Icon-03.png');
             background-size:100%;
         }
+
+        #gazerBox{
+            float: right;
+            height: 100vh;
+            width: 25%;
+            border: 2px solid green;
+            padding: 15px;
+            margin: 5px;
+                }
+        .buttonGreen {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 0;
+            width:100%;
+            height: 33%;
+            text-align: center;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+            vertical-align: top;
+        }
+        .textArea {
+            height: 33%;
+            width: 100%;
+            border: 2px solid white;
+        }
+        .buttonRed {
+            background-color: #f44336;
+            border: none;
+            color: white;
+            padding: 0;
+            width:100%;
+            height: 33%;
+            text-align: center;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        } /* Red */
+
         </style>
         
     </HEAD>
     <BODY LANG="en-US" LINK="#0000ff" DIR="LTR">
     <div id="mydiv">
         <h3 align="right">
-            Click on a few locations within the screen while looking purposefully at the cursor.<br>
-            Both clicks and cursor movements make the predictions more accurate.<br>
+            <button type="button" onclick="myMove()">Click Me</button> 
         </h3>
     </div>
-    <div id ="Container">
-        <p id="click_button">
-            <button onclick="myMove()">Click Me</button> 
-        </p>
-    </div>
-    
     <!--items moving-->
     <div id ="myContainer">
         <div id ="movieAnimation"></div>
@@ -73,14 +108,18 @@
         <div id ="acAnimation"></div>
     </div>
 
-
+    <div id ="gazerBox" style="position: relative;">
+        <button class="buttonGreen"> Correct! </button>
+        <div class="textArea"> Selected Option </div>
+        <button class="buttonRed"> Incorrect!</button>
+    </div>
         <script src="build/webgazer.js"></script>
         <script>
 	window.onload = function() {
     webgazer.setRegression('ridge') /* currently must set regression and tracker */
         .setTracker('clmtrackr')
         .setGazeListener(function(data, clock) {
-            console.log(data); /* data is an object containing an x and y key which are the x and y prediction coordinates (no bounds limiting) */
+            //console.log(data); /* data is an object containing an x and y key which are the x and y prediction coordinates (no bounds limiting) */
          //   console.log(clock); /* elapsed time in milliseconds since webgazer.begin() was called */
         })
         .begin()
@@ -92,14 +131,6 @@
     var leftDist = '0px';
     
     var setup = function() {
-        var video = document.getElementById('webgazerVideoFeed');
-        video.style.display = 'block';
-        video.style.position = 'absolute';
-        video.style.top = topDist;
-        video.style.left = leftDist;
-        video.width = width;
-        video.height = height;
-        video.style.margin = '0px';
 
         webgazer.params.imgWidth = width;
         webgazer.params.imgHeight = height;
@@ -117,14 +148,6 @@
 
         var cl = webgazer.getTracker().clm;
 
-        function drawLoop() {
-            requestAnimFrame(drawLoop);
-            overlay.getContext('2d').clearRect(0,0,width,height);
-            if (cl.getCurrentPosition()) {
-                cl.draw(overlay);
-            }
-        }
-        drawLoop();
     };
 
     function checkIfReady() {
