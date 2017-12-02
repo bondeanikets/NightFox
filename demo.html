@@ -7,15 +7,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <style>
         #click_button{
-            float:right;
             
         }
         #movie_frame{
             float:right;
         }
         #myContainer {
-            width: 1400;
-            height: 350;
+            width: 70%;
             position: relative;
         }
         #movieAnimation {
@@ -60,7 +58,7 @@
 
         #gazerBox{
             float: right;
-            height: 100vh;
+            height: 90vh;
             width: 25%;
             border: 2px solid green;
             padding: 15px;
@@ -105,7 +103,7 @@
     <BODY LANG="en-US" LINK="#0000ff" DIR="LTR">
     <script src="build/webgazer.js"></script>
     <script src="/stroke.js"></script>
-            <script>
+    <script>
          window.onload = function() {
             webgazer.setRegression('ridge') /* currently must set regression and tracker */
                 .setTracker('clmtrackr')
@@ -127,7 +125,6 @@
                 var cl = webgazer.getTracker().clm;
 
                 function drawLoop() {
-                    overlay.getContext('2d').clearRect(0,0,width,height);
                     if (cl.getCurrentPosition()) {
                     }
                 }
@@ -154,19 +151,16 @@
         
 
 
-    <div id ="Container">
-        <p id="click_button">
+    
+        <li id="click_button">
             <button onclick="myMove()">Click Me</button> 
             <input type="button" id="movie" value="movie" onClick="clickmovie()"/>
             <input type="button" id="food" value="food" onClick="clickfood()"/>
             <input type="button" id="book" value="book" onClick="clickbook()"/>
-        </p>
-        <p>
             <input type="button" id="m1" value="movie1" onClick="clickmovie(1)"/>
             <input type="button" id="m2" value="movie2" onClick="clickmovie(2)"/>
-            
-        </p>
-    </div>
+        </li>
+    
     
     <!--items moving-->
     <div id ="myContainer">
