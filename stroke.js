@@ -9,8 +9,8 @@ var strokeY = new Array();
 var sketch = new Array(); // store recognized strokes or gazing results
 var TEMPLATE_SKETCH = ['R','D','L','U','R']; // One template for testing sketch recognition results
 var SIGN_Start = true; // True for 1st time start recognizing strokes could be replaced by start button
-var SIGN_sketching = false;// True for recognizing sketch while gazing must be false
-var SIGN_gazing = true;// True for recognizing gazing while skething must be false
+var SIGN_sketching = true;// True for recognizing sketch while gazing must be false
+var SIGN_gazing = false;// True for recognizing gazing while skething must be false
 
 TEMPLATE_SKETCH = TEMPLATE_SKETCH.toString();
 var init = function(data,clock) {

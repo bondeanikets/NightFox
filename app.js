@@ -15,9 +15,15 @@ http.createServer(function (request, response) {
 	console.log('Read html is '+sign)
     } else if (pathname == "/build/webgazer.js") {
         script = fs.readFileSync("webgazer.js", "utf8");
-	//console.log("Script");
+    //console.log("Script");
         sign = response.write(script);
-	console.log('Read webgazer.js is'+sign);
+    console.log('Read webgazer.js is'+sign);
+
+    }else if (pathname == "/stroke.js") {
+        script = fs.readFileSync("stroke.js", "utf8");
+    //console.log("Script");
+        sign = response.write(script);
+    console.log('Read stroke.js is'+sign);
 
     }else{
     	console.log('Nothing for '+pathname+' is read');
