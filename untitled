@@ -1,0 +1,9 @@
+
+    const gfs = require('fs');
+    var gfd;
+    gfs.open("test", 'w', function(err, fd) {
+        if (err)
+            throw 'could not open ' + err;
+        gfd = fd;
+    });
+    
