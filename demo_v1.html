@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+        <TITLE>Simple Demonstration of how WebGazer.js works</TITLE>
+        <script src="jquery-3.2.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/nightfox.css">
+        <script src="jquery-3.2.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+    </HEAD>
+    <BODY LANG="en-US" LINK="#0000ff" DIR="LTR">
+    <!--<div id="mydiv">-->
+    <!--    <h3 align="right">-->
+    <!--        Click on a few locations within the screen while looking purposefully at the cursor.<br>-->
+    <!--        Both clicks and cursor movements make the predictions more accurate.<br>-->
+    <!--    </h3>-->
+    <!--</div>-->
+    <div id ="Container">
+        <p id="click_button">
+            <button id="move" onclick="myMove()">Click Me</button> 
+            <input type="button" id="movie" value="movie" onClick="clickmovie()"/>
+            <input type="button" id="food" value="food" onClick="clickfood()"/>
+            <input type="button" id="book" value="book" onClick="clickbook()"/>
+        </p>
+        <p>
+            <input type="button" id="m1" value="croods" onClick="clickmovie(1)"/>
+            <input type="button" id="m2" value="hungergame" onClick="clickmovie(2)"/>
+            <input type="button" id="m2" value="batman" onClick="clickmovie(3)"/>
+            <input type="button" id="m2" value="tinffany" onClick="clickmovie(4)"/>
+            
+        </p>
+    </div>
+    
+    <div id ="gazerBox">
+        <button class="buttonGreen"> Correct! </button>
+        <div class="textArea"> Selected Option </div>
+        <button class="buttonRed"> Incorrect!</button>
+    </div>
+  
+    
+    <!--items moving-->
+    <div id ="myContainer">
+        <div id ="movieAnimation"></div>
+        <div id ="foodAnimation"></div>
+        <div id ="bookAnimation"></div>
+        <div id ="acAnimation"></div>
+    </div>
+
+
+        <script src="build/webgazer.js"></script>
+        <script>
+// 	window.onload = function() {
+//     webgazer.setRegression('ridge') /* currently must set regression and tracker */
+//         .setTracker('clmtrackr')
+//         .setGazeListener(function(data, clock) {
+//             console.log(data); /* data is an object containing an x and y key which are the x and y prediction coordinates (no bounds limiting) */
+//          //   console.log(clock); /* elapsed time in milliseconds since webgazer.begin() was called */
+//         })
+//         .begin()
+//         .showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */
+
+//     var width = 320;
+//     var height = 240;
+//     var topDist = '0px';
+//     var leftDist = '0px';
+    
+//     var setup = function() {
+//         var video = document.getElementById('webgazerVideoFeed');
+//         video.style.display = 'block';
+//         video.style.position = 'absolute';
+//         video.style.top = topDist;
+//         video.style.left = leftDist;
+//         video.width = width;
+//         video.height = height;
+//         video.style.margin = '0px';
+
+//         webgazer.params.imgWidth = width;
+//         webgazer.params.imgHeight = height;
+
+//         var overlay = document.createElement('canvas');
+//         overlay.id = 'overlay';
+//         overlay.style.position = 'absolute';
+//         overlay.width = width;
+//         overlay.height = height;
+//         overlay.style.top = topDist;
+//         overlay.style.left = leftDist;
+//         overlay.style.margin = '0px';
+
+//         document.body.appendChild(overlay);
+
+//         var cl = webgazer.getTracker().clm;
+
+//         function drawLoop() {
+//             requestAnimFrame(drawLoop);
+//             overlay.getContext('2d').clearRect(0,0,width,height);
+//             if (cl.getCurrentPosition()) {
+//                 cl.draw(overlay);
+//             }
+//         }
+//         drawLoop();
+//     };
+
+//     function checkIfReady() {
+//         if (webgazer.isReady()) {
+//             setup();
+//         } else {
+//             setTimeout(checkIfReady, 100);
+//         }
+//     }
+//     setTimeout(checkIfReady,100);
+// };
+
+
+// window.onbeforeunload = function() {
+//     //webgazer.end(); //Uncomment if you want to save the data even if you reload the page.
+//     window.localStorage.clear(); //Comment out if you want to save data across different sessions 
+// }
+
+
+var cur_section="home";
+
+function myMove() {
+    var height = $(window).height()-200; 
+    var width = $(window).width()-200;
+    width = height;
+    
+    // var height = 320;
+    // var width = 240;
+    console.log("size height:"+height+" width:"+width);
+    var movie = document.getElementById("movieAnimation"); 
+    var food = document.getElementById("foodAnimation");
+    var book = document.getElementById("bookAnimation");
+    var ac = document.getElementById("acAnimation");
+    var id = setInterval(frame, 10);
+    var pos = 0;
+    var ac_x = 0;
+    var ac_y = 0;
+    var speed = 2;//pos=pos+speed;
+    function frame() {
+        if (pos == (3*height+2*width)) {
+            clearInterval(id);
+            //document.getElementById("movie").onclick();
+        } 
+        else if(pos < height) {
+            pos=pos+speed;
+            movie.style.top = pos + 'px'; 
+            // console.log("pos"+pos+" height:"+height+" "+ movie.style.top );
+            food.style.left = width - pos+ 'px'; 
+            book.style.left = pos+'px';
+            ac.style.top = height - pos+'px';
+            
+        }
+        else if((pos-height)<width){
+            pos=pos+speed;
+            movie.style.left = (pos-height) + 'px';
+            food.style.top = (pos-width)+'px';
+            book.style.top = height-(pos-width)+'px';
+            ac.style.left = width-(pos-height)+'px';
+        }
+        else if ((pos-height - width)<height){
+            pos=pos+speed;
+            movie.style.top = height-(pos-height - width) + 'px';
+            food.style.left = (pos-width-height)+'px';
+            book.style.left = width-(pos-height - width)+'px';
+            ac.style.top = pos-height-width+'px';
+        }
+        else if((pos-2*height-width)<width){
+            pos=pos+speed;
+            movie.style.left = width-(pos-2*height-width) + 'px';
+            food.style.top = height-(pos-width-2*height)+'px';
+            book.style.top = pos-height-2*width+'px';
+            ac.style.left = pos-width-2*height +'px';
+        }
+        else {
+            pos=pos+speed;
+            movie.style.top = pos-2*height - 2*width + 'px';
+            food.style.left = width-(pos-2*width-2*height)+'px';
+            book.style.left = pos-2*width-2*height+'px';
+            ac.style.top = height-(pos-2*width-2*height)+'px';
+        }
+        
+            
+    }
+    
+}
+
+
+function clickmovie(select)
+{
+    var height = 700; 
+    var width = 700;
+
+    //Replace the icons
+    if(cur_section == "home")
+    {
+        cur_section = "movie";
+        var m1 = document.getElementById("movieAnimation");
+        var m2 = document.getElementById("foodAnimation");
+        var m3 = document.getElementById("bookAnimation");
+        var m4 = document.getElementById("acAnimation");
+        m1.style.backgroundImage = "url('https://i.pinimg.com/236x/39/8d/04/398d04d0b65bae7e39762097516e3ad3--dreamworks-movies-dreamworks-animation.jpg')";
+        m2.style.backgroundImage = "url('http://www.togomeetings.com/wp-content/uploads/2017/07/charming-hunger-games-movie-posters-and-cool-ideas-of-the-mockinjay-part-2-movie-poster-by-liomdesign-on-12-128x128.jpg')";
+        m3.style.backgroundImage = "url('https://s-media-cache-ak0.pinimg.com/736x/e6/38/22/e638227096d168fa70f1c8ab32776495.jpg')";
+        m4.style.backgroundImage = "url('http://www.togomeetings.com/wp-content/uploads/2017/08/inspiring-breakfast-at-tiffanys-movie-poster-and-ideas-of-at-poster-by-joanna-carrero-posters-19-128x128.jpg')";
+    }
+
+    else if(cur_section =="movie")
+    {
+        var play = document.getElementById("myContainer");
+        if(select==1)
+            play.innerHTML='<iframe width="'+width+'" height="'+height+'" src="https://www.youtube.com/embed/D6oj6zBHu8o?autoplay=1" frameborder="0" allowfullscreen></iframe>';
+        else if(select == 2)
+            play.innerHTML = '<iframe width="'+width+'" height="'+height+'" src="https://www.youtube.com/embed/eO0T9A3kdqc?autoplay=1" frameborder="0" allowfullscreen></iframe>'
+        else if(select == 3)
+            play.innerHTML = '<iframe width="'+width+'" height="'+height+'" src="https://www.youtube.com/embed/DxpuF-_5miw?autoplay=1" frameborder="0" allowfullscreen></iframe>'
+        else
+            play.innerHTML = '<iframe width="'+width+'" height="'+height+'" src="https://www.youtube.com/embed/5F9MvhzexVw?autoplay=1" frameborder="0" allowfullscreen></iframe>'
+    }
+    
+    
+}
+function clickfood()
+{
+    if(cur_section == "home")
+    {
+        cur_section = "food";
+        //Replace the icons
+        var f1 = document.getElementById("movieAnimation");
+        var f2 = document.getElementById("foodAnimation");
+        var f3 = document.getElementById("bookAnimation");
+        var f4 = document.getElementById("acAnimation");
+        f1.style.backgroundImage = "url('https://www.shareicon.net/data/256x256/2016/08/19/817540_food_512x512.png')";
+        f2.style.backgroundImage = "url('https://static1.squarespace.com/static/58cfebd3b8a79b2da14dd209/t/58dac311cd0f68168e2a3957/1490819696440/')";
+        f3.style.backgroundImage = "url('https://i1.wp.com/fsjna.org/wp-content/uploads/2012/05/COFFEE.jpg?resize=256%2C256&ssl=1')";
+        f4.style.backgroundImage = "url('https://cdn0.iconfinder.com/data/icons/Dunking/512/Donut_2.png')";
+    }
+    else if(cur_section =="food")
+    {
+        var play = document.getElementById("myContainer");
+        // if(select==1)
+        //     play.innerHTML
+        
+    }
+   
+    
+}
+function clickbook()
+{
+    cur_section="book";
+    var b1 = document.getElementById("movieAnimation");
+    var b2 = document.getElementById("foodAnimation");
+    var b3 = document.getElementById("bookAnimation");
+    var b4 = document.getElementById("acAnimation");
+    b1.style.backgroundImage = "url('https://images-na.ssl-images-amazon.com/images/I/512FAHfICTL._CR0,82,335,335_UX128.jpg')";
+    b2.style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/en/5/52/Caesar_II_Coverart.png')";
+    b3.style.backgroundImage = "url('http://www.startwithabook.org/sites/default/files/book/watersources.jpg')";
+    b4.style.backgroundImage = "url('https://d2qbxixihjvzn0.cloudfront.net/ps/getCropped/6skoyR9000?res=256x256&index=www_sps')";
+}
+
+
+
+
+
+        </script>
+
+    </BODY>
+</HTML>
