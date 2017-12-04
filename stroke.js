@@ -20,6 +20,8 @@ if (clock>20000){// bigger than 100000 is just for delay
 	//removeMouseEventListeners();
 	alert('Recognizting starts now!');
 	home();
+	myMove();
+	var gazeresult;
 	}
 	time_stroke = time_stroke+1;
 	if (data){
@@ -36,6 +38,7 @@ if (clock>20000){// bigger than 100000 is just for delay
 			if (cnt_sketch>GAZE-1){
 				//alert(SKETCH+' strokes form one sketch is achieved.');
 				alert(sketch);// show recognized sketch(5 strokes)
+				gazeresult = templatematching(sketch, false);//false is for gaze
 				cnt_sketch = 0;
 				sketch.length = 0;
 			}
@@ -54,6 +57,7 @@ if (clock>20000){// bigger than 100000 is just for delay
 			if (cnt_sketch>SKETCH-1){
 				//alert(SKETCH+' strokes form one sketch is achieved.');
 				alert(sketch);// show recognized sketch(5 strokes)
+				gazeresult = templatematching(sketch,true);
 				//str_sketch = sketch.toString();
 				//if (str_sketch == TEMPLATE_SKETCH){
 				//	alert(sketch);
@@ -153,19 +157,19 @@ var recognition = function(strokeX,strokeY){
 
 		if ((f5>=Math.sqrt(2)/2)&(Math.abs(f6)<=Math.sqrt(2)/2)){
 			sketch.push('R');// Right
-			alert('cos is '+f5+'sin is '+f6+'Right');
+			//alert('cos is '+f5+'sin is '+f6+'Right');
 			//alert('START:('+startX+','+startY+')'+' END:('+endX+','+endY+')');
 		}else if ((Math.abs(f5)<=Math.sqrt(2)/2)&(f6<=-1*Math.sqrt(2)/2)){
 			sketch.push('D');// Down
-			alert('cos is '+f5+'sin is '+f6+'Down');
+			//alert('cos is '+f5+'sin is '+f6+'Down');
 			//alert('START:('+startX+','+startY+')'+' END:('+endX+','+endY+')');
 		}else if ((f5<=-1*Math.sqrt(2)/2)&(Math.abs(f6)<=Math.sqrt(2)/2)){
 			sketch.push('L');// Left
-			alert('cos is '+f5+'sin is '+f6+'Left');
+			//alert('cos is '+f5+'sin is '+f6+'Left');
 			//alert('START:('+startX+','+startY+')'+' END:('+endX+','+endY+')');
 		}else if ((Math.abs(f5)<=Math.sqrt(2)/2)&(f6>=Math.sqrt(2)/2)){
 			sketch.push('U');// Up
-			alert('cos is '+f5+'sin is '+f6+'Up');
+			//alert('cos is '+f5+'sin is '+f6+'Up');
 			//alert('START:('+startX+','+startY+')'+' END:('+endX+','+endY+')');
 		}else{
 			console.log(f5);

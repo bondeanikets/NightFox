@@ -1,26 +1,20 @@
 var cur_section="home";
 function myMove() {
-    // var height = $(window).height()-200; 
-    // var width = $(window).width()-200;
     var height = document.getElementById('myContainer').clientHeight-200;
     var width = document.getElementById('myContainer').clientWidth-200;
-    // var height = document.getElementById('myContainer').style.height-200;
-    // var width = document.getElementById('myContainer').style.width-200;
     
     width = height;
     
-    // var height = 320;
-    // var width = 240;
     console.log("size height:"+height+" width:"+width);
     var movie = document.getElementById("movieAnimation"); 
     var food = document.getElementById("foodAnimation");
     var book = document.getElementById("bookAnimation");
     var ac = document.getElementById("acAnimation");
-    var id = setInterval(frame, 15);
+    var id = setInterval(frame, 20);
     var pos = 0;
     var ac_x = 0;
     var ac_y = 0;
-    var speed = 3;//pos=pos+speed;
+    var speed = 10;//pos=pos+speed;
     function frame() {
         if (pos >= (3*height+2*width)) {
             clearInterval(id);
@@ -63,10 +57,7 @@ function myMove() {
             book.style.left = pos-2*width-2*height+'px';
             ac.style.top = height-(pos-2*width-2*height)+'px';
         }
-        
-            
     }
-    
 }
 
 function clickmovie(select)
@@ -249,7 +240,7 @@ function Element(hideItem, operation)
 
 function correct(select)
 {
-    select = 1;//select=templatematching();
+    
     if(cur_section == "home")
     {
         if(select == 1)
@@ -320,6 +311,56 @@ function incorrect()
         content.innerHTML = "";
         cur_section = "home";
         home();
+    }
+}
+
+
+function templatematching(array, flag)
+{
+    var template=[['D','R','U','L','D'],['R','U','L','D','R'],['U','L','D','R','U'],['L','D','R','U','L']];
+    var yn=[0,0];
+    var cur_select=-1;
+    var cur_yn = -1;
+    var i,j;
+    if(flag == true)//true for selecting items
+    {
+        var cur_max = -1;
+        var score=[0,0,0,0];
+        for(i = 0; i< 4; i++)
+        {
+            for(j = 0; j<5; j++)
+            {
+                if(template[i][j] == array[j])
+                {
+                    score[i]++;
+                }
+            }
+            if(score[i] > cur_max)
+            {
+                cur_max = score[i];
+                cur_select = i;
+            }
+        }
+        var content = document.getElementById("response");
+        content.innerHTML = "<h3>you are chooseing</h3><h1>"+cur_select+"</h1>";
+        return cur_select;
+    }
+    else//false is for selecting correct and incorrect
+    {
+        for(i = 0; i<5; i++)
+        {
+            if(array[i] == 'Y')
+            {
+                yn[0]++;
+            }
+            else{
+                yn[1]++;
+            }
+        }
+        cur_yn = yn[0]>yn[1]? 5:6;;
+        var content = document.getElementById("response");
+        content.innerHTML = "<h3>you are chooseing</h3><h1>"+cur_yn+"</h1>";
+        return  cur_yn//5 is for correct, 6 is for incorrect
     }
 }
 
