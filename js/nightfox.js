@@ -176,6 +176,9 @@ function clickbook(select)
 
 function clickac(select)
 {
+    var temp = 75;
+    var content = document.getElementById("response");
+    content.innerHTML = "<h3>current temperature</h3><h1>"+temp+"</h1>";
     if(cur_section == "home")
     {
         cur_section = "ac";
@@ -188,18 +191,16 @@ function clickac(select)
     }
     else if(cur_section == "ac")
     {
-        var temp = 75;
-        var content = document.getElementById("response");
-        content.innerHTML = "<h1>current temperature</h1><h2>"+temp+"</h2>";
+        
         if(select == 1)
         {
             temp = temp-3;
-            content.innerHTML = "<h1>current temperature</h1><h2>"+temp+"</h2>";
+            content.innerHTML = "<h3>current temperature</h3><h1>"+temp+"</h1>";
         }
         else if(select == 4)
         {
             temp = temp +3;
-            content.innerHTML = "<h1>current temperature</h1><h2>"+temp+"</h2>";
+            content.innerHTML = "<h3>current temperature</h3><h1>"+temp+"</h1>";
         }
     }
 }
