@@ -21,3 +21,8 @@
 * cd from terminal to the root folder of this repository
 * Type:  node app.js (you can also type: node app)
 * Open a web browser (e.g., Google Chrome) and enter the following website address: http://localhost:8000
+
+
+### Audio used in food section
+* The audio is generated using IBM watson text to speech API
+* https://text-to-speech-demo.ng.bluemix.net/

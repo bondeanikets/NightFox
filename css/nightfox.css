@@ -40,6 +40,11 @@
     background-image: url('https://daks2k3a4ib2z.cloudfront.net/58adc68142ff652745bbf599/58add3fc4effab671dfe7da6_Ikes%20Icon-03.png');
     background-size:100%;
 }
+
+#bookframe{
+    width : 80vh;
+    height : 80vh;
+}
 input[type=button]{
  background:transparent;
  border:0;

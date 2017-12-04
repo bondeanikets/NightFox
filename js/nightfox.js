@@ -104,8 +104,9 @@ function clickmovie(select)
     
     
 }
-function clickfood()
+function clickfood(select)
 {
+    console.log("food clicked:"+cur_section);
     if(cur_section == "home")
     {
         cur_section = "food";
@@ -117,38 +118,89 @@ function clickfood()
         f1.style.backgroundImage = "url('https://www.shareicon.net/data/256x256/2016/08/19/817540_food_512x512.png')";
         f2.style.backgroundImage = "url('https://static1.squarespace.com/static/58cfebd3b8a79b2da14dd209/t/58dac311cd0f68168e2a3957/1490819696440/')";
         f3.style.backgroundImage = "url('https://i1.wp.com/fsjna.org/wp-content/uploads/2012/05/COFFEE.jpg?resize=256%2C256&ssl=1')";
-        f4.style.backgroundImage = "url('https://cdn0.iconfinder.com/data/icons/Dunking/512/Donut_2.png')";
+        f4.style.backgroundImage = "url('http://www-static.dreambox.com/wp-content/uploads/2015/02/Prize-Icon-Pizza.png')";
     }
     else if(cur_section =="food")
     {
-        var play = document.getElementById("myContainer");
-        // if(select==1)
-        //     play.innerHTML
-        
+        cur_section = "order_food";
+        var eat = document.getElementById("myContainer");
+        if(select == 1)
+            eat.innerHTML = '<div><img src="https://assets.listia.com/photos/4a8630f0722f2ca3ab1e/original.png?s=320x320m&sig=3074b6e9ba810476&ts=1372566883"/></div><audio control autoplay><source src="food/burger.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+        else if(select == 2)
+            eat.innerHTML = '<div><img src="https://us.123rf.com/450wm/stockakia/stockakia1508/stockakia150800003/43692670-vector-illustration-of-an-egg-and-a-bacon-character.jpg"/></div><audio control autoplay><source src="food/baconegg.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>'
+        else if(select == 3)
+            eat.innerHTML = '<div><img src="https://www.starbucks.com.au/imagecache/bestfit/750x750/_files/Beverages/processed-2013/icedlatte.jpg"/></div><audio control autoplay><source src="food/coffee.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>'
+        else
+            eat.innerHTML = '<div><img src="http://www.freeiconspng.com/uploads/pizza-icon-26.jpg"/></div><audio control autoplay><source src="food/pizza.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>'
     }
    
     
 }
-function clickbook()
+function clickbook(select)
 {
-    cur_section="book";
-    var b1 = document.getElementById("movieAnimation");
-    var b2 = document.getElementById("foodAnimation");
-    var b3 = document.getElementById("bookAnimation");
-    var b4 = document.getElementById("acAnimation");
-    b1.style.backgroundImage = "url('https://images-na.ssl-images-amazon.com/images/I/512FAHfICTL._CR0,82,335,335_UX128.jpg')";
-    b2.style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/en/5/52/Caesar_II_Coverart.png')";
-    b3.style.backgroundImage = "url('http://www.startwithabook.org/sites/default/files/book/watersources.jpg')";
-    b4.style.backgroundImage = "url('https://d2qbxixihjvzn0.cloudfront.net/ps/getCropped/6skoyR9000?res=256x256&index=www_sps')";
+    if(cur_section == "home")
+    {
+        cur_section="book";
+        var b1 = document.getElementById("movieAnimation");
+        var b2 = document.getElementById("foodAnimation");
+        var b3 = document.getElementById("bookAnimation");
+        var b4 = document.getElementById("acAnimation");
+        b1.style.backgroundImage = "url('https://images-na.ssl-images-amazon.com/images/I/512FAHfICTL._CR0,82,335,335_UX128.jpg')";
+        b2.style.backgroundImage = "url('https://pbs.twimg.com/profile_images/1689964352/assets.jpeg')";
+        b3.style.backgroundImage = "url('http://www.startwithabook.org/sites/default/files/book/watersources.jpg')";
+        b4.style.backgroundImage = "url('https://d2qbxixihjvzn0.cloudfront.net/ps/getCropped/6skoyR9000?res=256x256&index=www_sps')";
+    }
+    else if(cur_section == "book")
+    {
+        cur_section = "read_book";
+        var read = document.getElementById("myContainer");
+        if(select == 1)
+        {
+            read.innerHTML = '<iframe style="width:80vh; height:80vh;" src="book/1q84.html"><p>Your browser does not support iframes.</p></iframe>';
+        }
+        if(select == 2)
+        {
+            read.innerHTML = '<iframe style="width:80vh; height:80vh;" src="book/eat.html"><p>Your browser does not support iframes.</p></iframe>';
+        }
+        if(select == 3)
+        {
+            read.innerHTML = '<iframe style="width:80vh; height:80vh;" src="book/water.html"><p>Your browser does not support iframes.</p></iframe>';
+        }
+        else
+        {
+            read.innerHTML = '<iframe style="width:80vh; height:80vh;" src="book/gray.html"><p>Your browser does not support iframes.</p></iframe>';
+        }
+    }
+    
 }
 
-function clickac()
+function clickac(select)
 {
     if(cur_section == "home")
     {
         cur_section = "ac";
-        var ac = document.getElementById("myContainer");
-        ac.innerHTML="<h1>current temprature</h1>";
+        var cool = document.getElementById("movieAnimation");
+        var warm = document.getElementById("acAnimation");
+        cool.style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Snow_flake.svg/2000px-Snow_flake.svg.png')";
+        warm.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6MoRcHdHVlHPY_OoOU30b2J2Q0B3rWiVUVmcHl_UTJ2Qeuueo')";
+        var hideItem=["foodAnimation","bookAnimation"];
+        Element(hideItem,'h');
+    }
+    else if(cur_section == "ac")
+    {
+        var temp = 75;
+        var content = document.getElementById("response");
+        content.innerHTML = "<h1>current temperature</h1><h2>"+temp+"</h2>";
+        if(select == 1)
+        {
+            temp = temp-3;
+            content.innerHTML = "<h1>current temperature</h1><h2>"+temp+"</h2>";
+        }
+        else if(select == 4)
+        {
+            temp = temp +3;
+            content.innerHTML = "<h1>current temperature</h1><h2>"+temp+"</h2>";
+        }
     }
 }
 
@@ -194,9 +246,9 @@ function Element(hideItem, operation)
     
 }
 
-function correct()
+function correct(select)
 {
-    var select = 1;//select=templatematching();
+    select = 1;//select=templatematching();
     if(cur_section == "home")
     {
         if(select == 1)
@@ -228,9 +280,8 @@ function correct()
 
 function incorrect()
 {
-    if(cur_section =="play_movie"||cur_section == "ac" )
+    if(cur_section =="play_movie"||cur_section == "ac" || cur_section == "order_food"||cur_section == "read_book")
     {
-        
         var h=document.getElementById("myContainer");
         h.innerHTML = '<div id ="movieAnimation"></div><div id ="foodAnimation"></div><div id ="bookAnimation"></div><div id ="acAnimation"></div>';
         home();
@@ -239,19 +290,33 @@ function incorrect()
             cur_section ="home";
             clickmovie();
         }
+        else if(cur_section == "order_food")
+        {
+            cur_section = "home";
+            clickfood();
+        }
+        else if(cur_section =="read_book")
+        {
+            cur_section = "home";
+            clickbook();
+        }
         else if(cur_section == "ac")
         {
             cur_section ="home";
-            clickac();
+            home();
         }
     }
     else if(cur_section == "movie" || cur_section == "food" || cur_section == "book" || cur_section == "ac")
     {
+        var content = document.getElementById("response");
+        content.innerHTML = "";
         cur_section="home";
         home();
     }
     else
     {
+        var content = document.getElementById("response");
+        content.innerHTML = "";
         cur_section = "home";
         home();
     }

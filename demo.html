@@ -29,10 +29,21 @@
             <input type="button" id="food" value="food" onClick="clickfood()"/>
             <input type="button" id="book" value="book" onClick="clickbook()"/>
             <input type="button" id="ac" value="ac" onClick="clickac()"/>
+            
             <input type="button" id="m1" value="croods" onClick="clickmovie(1)"/>
             <input type="button" id="m2" value="hungergame" onClick="clickmovie(2)"/>
             <input type="button" id="m2" value="batman" onClick="clickmovie(3)"/>
             <input type="button" id="m2" value="tinffany" onClick="clickmovie(4)"/>
+            
+            <input type="button" id="f1" value="burger" onClick="clickfood(1)"/>
+            <input type="button" id="f2" value="bacon&egg" onClick="clickfood(2)"/>
+            <input type="button" id="f3" value="coffee" onClick="clickfood(3)"/>
+            <input type="button" id="f4" value="pizza" onClick="clickfood(4)"/>
+            
+            <input type="button" id="b1" value="1Q84" onClick="clickbook(1)"/>
+            <input type="button" id="b2" value="eatparylove" onClick="clickbook(2)"/>
+            <input type="button" id="b3" value="watersources" onClick="clickbook(3)"/>
+            <input type="button" id="b4" value="graymountain" onClick="clickbook(4)"/>
         </li>
     </div>
     
@@ -50,7 +61,7 @@
         <div class="col-md-3">
             <div id ="gazerBox">
                 <button class="buttonGreen" id="correct" onclick="correct()"> CONTINUE </button>
-                <div class="textArea"> Selected Option </div>
+                <div class="textArea" id="response"></div>
                 <button class="buttonRed" id="incorrect" onclick="incorrect()"> GO BACK</button>
             </div>
         </div>
