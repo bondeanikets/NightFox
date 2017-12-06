@@ -10,11 +10,11 @@ function myMove() {
     var food = document.getElementById("foodAnimation");
     var book = document.getElementById("bookAnimation");
     var ac = document.getElementById("acAnimation");
-    var id = setInterval(frame, 20);
+    var id = setInterval(frame, 15);//call frame every 10 ms
     var pos = 0;
     var ac_x = 0;
     var ac_y = 0;
-    var speed = 10;//pos=pos+speed;
+    var speed = height/133;//pos=pos+speed;
     function frame() {
         if (pos >= (3*height+2*width)) {
             clearInterval(id);
@@ -341,8 +341,10 @@ function templatematching(array, flag)
                 cur_select = i;
             }
         }
+        correct(cur_select+1);
         var content = document.getElementById("response");
-        content.innerHTML = "<h3>you are chooseing</h3><h1>"+cur_select+"</h1>";
+        content.innerHTML = "<h3>you are chooseing</h3><h1>"+(cur_select+1)+"</h1>";
+        
         return cur_select;
     }
     else//false is for selecting correct and incorrect

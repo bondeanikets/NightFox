@@ -5,18 +5,20 @@ function start() {
         .setGazeListener(function(data, clock) {
         //    console.log(data); /* data is an object containing an x and y key which are the x and y prediction coordinates (no bounds limiting) */
         init(data, clock);
-        if (clock>40000) {
-            SIGN_gazing = true;
-            SIGN_sketching = false;     
-            init(data, clock);               
-        }
+        // if (clock>40000) {
+        //     SIGN_gazing = true;
+        //     SIGN_sketching = false;     
+        //     init(data, clock);               
+        // }
         //   console.log(clock); /* elapsed time in milliseconds since webgazer.begin() was called */
         })
         .begin()
         .showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */
 
-    var width = 320;
-    var height = 240;
+    // var width = 320;
+    // var height = 240;
+    var height = document.getElementById('myContainer').clientHeight-200;
+    var width = document.getElementById('myContainer').clientWidth-200;
     var topDist = '0px';
     var leftDist = '0px';
     

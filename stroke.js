@@ -1,6 +1,6 @@
 var time_stroke = 0; // time counter for get one stroke
 var cnt_sketch = 0; // counter for get one sketch
-var Sketch_TIMEWINDOW = 100;// 100ms = 10 seconds.
+var Sketch_TIMEWINDOW = 150;// 100ms = 10 seconds.
 var Gaze_TIMEWINDOW = 50;// 5 seconds
 var SKETCH = 5; // 5 strokes in one sketch
 var GAZE = 5; // 5 gazes in one sketch for return
@@ -20,7 +20,8 @@ if (clock>20000){// bigger than 100000 is just for delay
 	//removeMouseEventListeners();
 	alert('Recognizting starts now!');
 	home();
-	myMove();
+	setTimeout(function(){ 	myMove(); }, 3000);
+
 	var gazeresult;
 	}
 	time_stroke = time_stroke+1;
