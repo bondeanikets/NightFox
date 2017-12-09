@@ -1,5 +1,9 @@
 var cur_section="home";
+var count = 0;
 function myMove() {
+    //SIGN_sketching = true;// True for recognizing sketch while gazing must be false
+    //SIGN_gazing = false;// True for recognizing gazing while skething must be false
+    
     var height = document.getElementById('myContainer').clientHeight-200;
     var width = document.getElementById('myContainer').clientWidth-200;
     
@@ -14,7 +18,8 @@ function myMove() {
     var pos = 0;
     var ac_x = 0;
     var ac_y = 0;
-    var speed = height/133;//pos=pos+speed;
+    //var speed = height/133;//pos=pos+speed;
+    var speed = 13;
     function frame() {
         if (pos >= (3*height+2*width)) {
             clearInterval(id);
@@ -58,6 +63,9 @@ function myMove() {
             ac.style.top = height-(pos-2*width-2*height)+'px';
         }
     }
+    // add by Chao: Because move icon, then start recognize sketch
+    //SIGN_sketching = true;// True for recognizing sketch while gazing must be false
+    //SIGN_gazing = false;// True for recognizing gazing while skething must be false
 }
 
 function clickmovie(select)
@@ -73,6 +81,16 @@ function clickmovie(select)
         var m2 = document.getElementById("foodAnimation");
         var m3 = document.getElementById("bookAnimation");
         var m4 = document.getElementById("acAnimation");
+        
+        m1.style.left = "0px";
+        m1.style.top = "0px";
+        m2.style.left = document.getElementById('myContainer').clientWidth-200;
+        m2.style.top = "0px";
+        m3.style.left = "0px";
+        m3.style.top = document.getElementById('myContainer').clientHeight-200;
+        m4.style.left = document.getElementById('myContainer').clientWidth-200;
+        m4.style.top = document.getElementById('myContainer').clientHeight-200;
+        
         m1.style.backgroundImage = "url('https://i.pinimg.com/236x/39/8d/04/398d04d0b65bae7e39762097516e3ad3--dreamworks-movies-dreamworks-animation.jpg')";
         m2.style.backgroundImage = "url('http://www.togomeetings.com/wp-content/uploads/2017/07/charming-hunger-games-movie-posters-and-cool-ideas-of-the-mockinjay-part-2-movie-poster-by-liomdesign-on-12-128x128.jpg')";
         m3.style.backgroundImage = "url('https://s-media-cache-ak0.pinimg.com/736x/e6/38/22/e638227096d168fa70f1c8ab32776495.jpg')";
@@ -91,6 +109,9 @@ function clickmovie(select)
             play.innerHTML = '<iframe width="'+width+'" height="'+height+'" src="https://www.youtube.com/embed/DxpuF-_5miw?autoplay=1" frameborder="0" allowfullscreen></iframe>'
         else
             play.innerHTML = '<iframe width="'+width+'" height="'+height+'" src="https://www.youtube.com/embed/5F9MvhzexVw?autoplay=1" frameborder="0" allowfullscreen></iframe>'
+        SIGN_sketching = false;
+        SIGN_gazing = true;
+        
     }
     
     
@@ -106,6 +127,15 @@ function clickfood(select)
         var f2 = document.getElementById("foodAnimation");
         var f3 = document.getElementById("bookAnimation");
         var f4 = document.getElementById("acAnimation");
+        f1.style.left = "0px";
+        f1.style.top = "0px";
+        f2.style.left = document.getElementById('myContainer').clientWidth-200;
+        f2.style.top = "0px";
+        f3.style.left = "0px";
+        f3.style.top = document.getElementById('myContainer').clientHeight-200;
+        f4.style.left = document.getElementById('myContainer').clientWidth-200;
+        f4.style.top = document.getElementById('myContainer').clientHeight-200;
+        
         f1.style.backgroundImage = "url('https://www.shareicon.net/data/256x256/2016/08/19/817540_food_512x512.png')";
         f2.style.backgroundImage = "url('https://static1.squarespace.com/static/58cfebd3b8a79b2da14dd209/t/58dac311cd0f68168e2a3957/1490819696440/')";
         f3.style.backgroundImage = "url('https://i1.wp.com/fsjna.org/wp-content/uploads/2012/05/COFFEE.jpg?resize=256%2C256&ssl=1')";
@@ -123,6 +153,9 @@ function clickfood(select)
             eat.innerHTML = '<div><img src="https://www.starbucks.com.au/imagecache/bestfit/750x750/_files/Beverages/processed-2013/icedlatte.jpg"/></div><audio control autoplay><source src="food/coffee.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>'
         else
             eat.innerHTML = '<div><img src="http://www.freeiconspng.com/uploads/pizza-icon-26.jpg"/></div><audio control autoplay><source src="food/pizza.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>'
+    
+        SIGN_sketching = false;
+        SIGN_gazing = true;
     }
    
     
@@ -136,6 +169,16 @@ function clickbook(select)
         var b2 = document.getElementById("foodAnimation");
         var b3 = document.getElementById("bookAnimation");
         var b4 = document.getElementById("acAnimation");
+        
+        b1.style.left = "0px";
+        b1.style.top = "0px";
+        b2.style.left = document.getElementById('myContainer').clientWidth-200;
+        b2.style.top = "0px";
+        b3.style.left = "0px";
+        b3.style.top = document.getElementById('myContainer').clientHeight-200;
+        b4.style.left = document.getElementById('myContainer').clientWidth-200;
+        b4.style.top = document.getElementById('myContainer').clientHeight-200;
+        
         b1.style.backgroundImage = "url('https://images-na.ssl-images-amazon.com/images/I/512FAHfICTL._CR0,82,335,335_UX128.jpg')";
         b2.style.backgroundImage = "url('https://pbs.twimg.com/profile_images/1689964352/assets.jpeg')";
         b3.style.backgroundImage = "url('http://www.startwithabook.org/sites/default/files/book/watersources.jpg')";
@@ -161,6 +204,8 @@ function clickbook(select)
         {
             read.innerHTML = '<iframe style="width:80vh; height:80vh;" src="book/gray.html"><p>Your browser does not support iframes.</p></iframe>';
         }
+        SIGN_sketching = false;
+        SIGN_gazing = true;
     }
     
 }
@@ -175,6 +220,10 @@ function clickac(select)
         cur_section = "ac";
         var cool = document.getElementById("movieAnimation");
         var warm = document.getElementById("acAnimation");
+        cool.style.left = "0px";
+        cool.style.top = "0px";
+        warm.style.left = document.getElementById('myContainer').clientWidth-200;
+        warm.style.top = document.getElementById('myContainer').clientHeight-200;
         cool.style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Snow_flake.svg/2000px-Snow_flake.svg.png')";
         warm.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6MoRcHdHVlHPY_OoOU30b2J2Q0B3rWiVUVmcHl_UTJ2Qeuueo')";
         var hideItem=["foodAnimation","bookAnimation"];
@@ -317,11 +366,29 @@ function incorrect()
 
 function templatematching(array, flag)
 {
-    var template=[['D','R','U','L','D'],['R','U','L','D','R'],['U','L','D','R','U'],['L','D','R','U','L']];
+    var template=[['D','R','U','L','D'],['L','D','R','U','L'],['R','U','L','D','R'],['U','L','D','R','U']];
     var yn=[0,0];
     var cur_select=-1;
     var cur_yn = -1;
-    var i,j;
+    var i,j,k;
+    var flagcount=0;
+    for(k=0; k<array.length; k++)
+    {
+        if(array[k] =='Y'||array[k] == 'N')
+            flagcount--;
+        else 
+            flagcount++;
+    }
+    if(flagcount >0)
+    {
+        flag = true;
+    }
+    else 
+    {
+        flag = false;
+    }
+    
+    
     if(flag == true)//true for selecting items
     {
         var cur_max = -1;
@@ -343,11 +410,44 @@ function templatematching(array, flag)
         }
         correct(cur_select+1);
         var content = document.getElementById("response");
-        content.innerHTML = "<h3>you are chooseing</h3><h1>"+(cur_select+1)+"</h1>";
+        var temp="";
+        if(count%2 == 0)
+        {
+            if(cur_select == 0)
+            temp = "movie";
+            else if(cur_select == 1)
+            temp = "food";
+            else if(cur_select == 2)
+            temp = "book";
+            else if(cur_select == 3)
+            {
+                temp = "AC";
+            }
+            count++;
+        }
+        else
+        {
+            temp = cur_select+1;
+        }
+        if(cur_section == "play_movie")
+            content.innerHTML = "<h3>you are choosing</h3><h1>"+temp+"</h1><h5>1.croods</h5><h5>2.hunger game</h5><h5>3.batman</h5><h5>Tiffiney</h5>";
+        else if(cur_section == "order_food")
+        {
+            content.innerHTML = "<h3>you are choosing</h3><h1>"+temp+"</h1><h5>1.burger</h5><h5>2.bacon</h5><h5>3.coffee</h5><h5>4.pizza</h5>";
+        }
+        else if(cur_section == "read_book")
+        {
+            content.innerHTML = "<h5>you are choosing</h5><h1>"+temp+"</h1><h5>1.1Q84</h5><h5>2.eatpraylove</h5><h5>3.water</h5><h5>4.mounatin</h5>";
+
+        }
+        else if(cur_section == "ac")
+        {
+            content.innerHTML = "<h3>you are choosing</h3><h1>"+temp+"</h1><h3>1.cooling</h3><h3>4.warming</h3>";
+        }
         
         return cur_select;
     }
-    else//false is for selecting correct and incorrect
+    else//false is for selecting continue and go back
     {
         for(i = 0; i<5; i++)
         {
@@ -359,9 +459,11 @@ function templatematching(array, flag)
                 yn[1]++;
             }
         }
-        cur_yn = yn[0]>yn[1]? 5:6;;
+        cur_yn = yn[0]>yn[1]? 5:6;
         var content = document.getElementById("response");
-        content.innerHTML = "<h3>you are chooseing</h3><h1>"+cur_yn+"</h1>";
+        var temp = cur_yn==5?"continue":"back"
+        content.innerHTML = "<h3>you are choosing</h3><h1>"+temp+"</h1>";
+        if(cur_yn == 6) incorrect();
         return  cur_yn//5 is for correct, 6 is for incorrect
     }
 }

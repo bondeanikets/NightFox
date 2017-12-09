@@ -4,7 +4,7 @@
         <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
         <TITLE>NightFox</TITLE>
         <link rel="stylesheet" type="text/css" href="css/nightfox.css">
-        <script src="jquery-3.2.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="build/webgazer.js"></script>
         <script src="js/nightfox.js"></script>
@@ -20,34 +20,41 @@
     </HEAD>
     
     <BODY>
-     <div class="row">
-        <li id="click_button">
-            <button onclick="train()">Training</button> 
-            <button onclick="home()">Home</button> 
-            <button onclick="myMove()">Moving</button> 
-            <input type="button" id="movie" value="movie" onClick="clickmovie()"/>
-            <input type="button" id="food" value="food" onClick="clickfood()"/>
-            <input type="button" id="book" value="book" onClick="clickbook()"/>
-            <input type="button" id="ac" value="ac" onClick="clickac()"/>
+    <!-- <div class="row">-->
+    <!--    <li id="click_button">-->
+    <!--        <button onclick="train()">Training</button> -->
+    <!--        <button onclick="home()">Home</button> -->
+    <!--        <button onclick="myMove()">Moving</button> -->
+    <!--        <input type="button" id="movie" value="movie" onClick="clickmovie()"/>-->
+    <!--        <input type="button" id="food" value="food" onClick="clickfood()"/>-->
+    <!--        <input type="button" id="book" value="book" onClick="clickbook()"/>-->
+    <!--        <input type="button" id="ac" value="ac" onClick="clickac()"/>-->
             
-            <input type="button" id="m1" value="croods" onClick="clickmovie(1)"/>
-            <input type="button" id="m2" value="hungergame" onClick="clickmovie(2)"/>
-            <input type="button" id="m2" value="batman" onClick="clickmovie(3)"/>
-            <input type="button" id="m2" value="tinffany" onClick="clickmovie(4)"/>
+    <!--        <input type="button" id="m1" value="croods" onClick="clickmovie(1)"/>-->
+    <!--        <input type="button" id="m2" value="hungergame" onClick="clickmovie(2)"/>-->
+    <!--        <input type="button" id="m2" value="batman" onClick="clickmovie(3)"/>-->
+    <!--        <input type="button" id="m2" value="tinffany" onClick="clickmovie(4)"/>-->
             
-            <input type="button" id="f1" value="burger" onClick="clickfood(1)"/>
-            <input type="button" id="f2" value="bacon&egg" onClick="clickfood(2)"/>
-            <input type="button" id="f3" value="coffee" onClick="clickfood(3)"/>
-            <input type="button" id="f4" value="pizza" onClick="clickfood(4)"/>
+    <!--        <input type="button" id="f1" value="burger" onClick="clickfood(1)"/>-->
+    <!--        <input type="button" id="f2" value="bacon&egg" onClick="clickfood(2)"/>-->
+    <!--        <input type="button" id="f3" value="coffee" onClick="clickfood(3)"/>-->
+    <!--        <input type="button" id="f4" value="pizza" onClick="clickfood(4)"/>-->
             
-            <input type="button" id="b1" value="1Q84" onClick="clickbook(1)"/>
-            <input type="button" id="b2" value="eatparylove" onClick="clickbook(2)"/>
-            <input type="button" id="b3" value="watersources" onClick="clickbook(3)"/>
-            <input type="button" id="b4" value="graymountain" onClick="clickbook(4)"/>
-        </li>
+    <!--        <input type="button" id="b1" value="1Q84" onClick="clickbook(1)"/>-->
+    <!--        <input type="button" id="b2" value="eatparylove" onClick="clickbook(2)"/>-->
+    <!--        <input type="button" id="b3" value="watersources" onClick="clickbook(3)"/>-->
+    <!--        <input type="button" id="b4" value="graymountain" onClick="clickbook(4)"/>-->
+    <!--    </li>-->
+    <!--</div>-->
+    
+    
+    <div class="row" id="training_row" style="display: block;">
+    <center><h2>Click on a few locations within the screen while looking purposefully at the cursor.</h2></center>
+    <center><h2>Both clicks and cursor movements make the predictions more accurate.</h2></center>
     </div>
     
-    <div class="row">
+    
+    <div class="row" id="nocursor">
         <!--homepage moving items-->
         <div class="col-md-9">
             <div id ="myContainer">
@@ -60,13 +67,14 @@
         <!--Confirmation-->
         <div class="col-md-3">
             <div id ="gazerBox">
-                <button class="buttonGreen" id="correct" onclick="correct()"> CONTINUE </button>
+                <button class="buttonGreen" id="correct" style="display: none;" onclick="correct()"> CONTINUE </button>
                 <div class="textArea" id="response"></div>
-                <button class="buttonRed" id="incorrect" onclick="incorrect()"> GO BACK</button>
+                <button class="buttonRed" id="incorrect" style="display: none;" onclick="incorrect()"> GO BACK</button>
             </div>
         </div>
     </div>
     <script>
+     //document.getElementById('nocursor').style.cursor = 'none';
         window.onload =start();
         //  $(document).ready(function() {
         //      start();

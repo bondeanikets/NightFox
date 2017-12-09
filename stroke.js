@@ -1,6 +1,6 @@
 var time_stroke = 0; // time counter for get one stroke
 var cnt_sketch = 0; // counter for get one sketch
-var Sketch_TIMEWINDOW = 150;// 100ms = 10 seconds.
+var Sketch_TIMEWINDOW = 75;// 100ms = 10 seconds.
 var Gaze_TIMEWINDOW = 50;// 5 seconds
 var SKETCH = 5; // 5 strokes in one sketch
 var GAZE = 5; // 5 gazes in one sketch for return
@@ -14,8 +14,11 @@ var SIGN_gazing = false;// True for recognizing gazing while skething must be fa
 
 TEMPLATE_SKETCH = TEMPLATE_SKETCH.toString();
 var init = function(data,clock) {
-if (clock>20000){// bigger than 100000 is just for delay
+if (clock>40000){// bigger than 100000 is just for delay
 	if (SIGN_Start){
+	document.getElementById('correct').style.display = 'block';
+	document.getElementById('incorrect').style.display = 'block';
+	document.getElementById('training_row').style.display = 'none';
 	SIGN_Start = false;
 	//removeMouseEventListeners();
 	alert('Recognizting starts now!');
@@ -24,11 +27,14 @@ if (clock>20000){// bigger than 100000 is just for delay
 
 	var gazeresult;
 	}
-	time_stroke = time_stroke+1;
-	if (data){
-		strokeX.push(data.x);
-		strokeY.push(data.y);
-		//console.log('Push one point');
+	
+	if (SIGN_sketching|SIGN_gazing){
+		time_stroke = time_stroke+1;
+		if (data){
+			strokeX.push(data.x);
+			strokeY.push(data.y);
+			//console.log('Push one point');
+		}
 	}
 	
 	// Check signs & Start recognizing
@@ -42,6 +48,15 @@ if (clock>20000){// bigger than 100000 is just for delay
 				gazeresult = templatematching(sketch, false);//false is for gaze
 				cnt_sketch = 0;
 				sketch.length = 0;
+				if(cur_section == "home"|| cur_section == "movie" || cur_section == "book"||cur_section == "food"||cur_section == "ac")
+				{
+					SIGN_gazing = false;
+					SIGN_sketching = true;
+					setTimeout(function(){ 	
+					myMove(); 
+					}, 2000);
+				}
+				
 			}
 			time_stroke = 0;
 		}
@@ -65,8 +80,12 @@ if (clock>20000){// bigger than 100000 is just for delay
 				//}
 				cnt_sketch = 0;
 				sketch.length = 0;
+				// Enalble Gazing recognition
+				SIGN_gazing = true;
+				SIGN_sketching = false;
 			}
 			time_stroke = 0;
+			
 		}
 	}
 }
@@ -127,9 +146,9 @@ var recognition = function(strokeX,strokeY){
 					gazeY++;
 				}
 			}
-                }
+        }
 
-		if (gazeY>gazeN){
+		if (gazeY>=gazeN){
 			sketch.push('Y');
 			//sketch = [gazeY,gazeN,'Y','Y','Y','Y','Y'];
 		}else{
@@ -155,8 +174,9 @@ var recognition = function(strokeX,strokeY){
 
 
 	}else if ((!SIGN_gazing)&SIGN_sketching){//sketching
-
-		if ((f5>=Math.sqrt(2)/2)&(Math.abs(f6)<=Math.sqrt(2)/2)){
+		if ((mean(strokeX)>0.45*screen.width)&(mean(strokeY)>0.45*screen.height)){
+			sketch.push('N');
+		}else if ((f5>=Math.sqrt(2)/2)&(Math.abs(f6)<=Math.sqrt(2)/2)){
 			sketch.push('R');// Right
 			//alert('cos is '+f5+'sin is '+f6+'Right');
 			//alert('START:('+startX+','+startY+')'+' END:('+endX+','+endY+')');

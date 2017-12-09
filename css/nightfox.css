@@ -7,15 +7,15 @@
     position: relative;
 }
 #movieAnimation {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     position: absolute;
     background-image: url('http://icons.iconarchive.com/icons/designbolts/free-multimedia/1024/Clapper-icon.png');
     background-size: 100%;
 }
 #foodAnimation {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     position: absolute;
     background-image: url('http://www-static.dreambox.com/wp-content/uploads/2015/02/Prize-Icon-Pizza.png');
     background-size: 100%;
@@ -23,8 +23,8 @@
     left: 80vh;
 }
 #bookAnimation{
-    width:80px;
-    height:80px;
+    width:100px;
+    height:100px;
     position: absolute;
     background-image: url('https://freeiconshop.com/wp-content/uploads/edd/book-flat.png');
     background-size:100%;
@@ -32,8 +32,8 @@
     left:0px;
 }
 #acAnimation{
-    width:80px;
-    height:80px;
+    width:100px;
+    height:100px;
     position: absolute;
     top: 80vh;
     left: 80vh;
